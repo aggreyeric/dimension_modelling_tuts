@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: dim_postgres
+    environment:
+      POSTGRES_USER: dimuser
+      POSTGRES_PASSWORD: dimpass
+      POSTGRES_DB: dimdb
+    ports:
+      - "5444:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
